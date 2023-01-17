@@ -1,4 +1,5 @@
-package de.neuefische.neuefischespringsecuritydemo;
+package de.neuefische.neuefischespringsecuritydemo.appUser;
+
 
 import org.springframework.data.mongodb.repository.MongoRepository;
 

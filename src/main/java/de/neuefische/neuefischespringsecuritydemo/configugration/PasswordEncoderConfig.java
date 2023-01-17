@@ -1,4 +1,4 @@
-package de.neuefische.neuefischespringsecuritydemo;
+package de.neuefische.neuefischespringsecuritydemo.configugration;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

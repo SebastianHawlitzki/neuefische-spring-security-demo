@@ -1,5 +1,7 @@
-package de.neuefische.neuefischespringsecuritydemo;
+package de.neuefische.neuefischespringsecuritydemo.configugration;
 
+import de.neuefische.neuefischespringsecuritydemo.appUser.AppUser;
+import de.neuefische.neuefischespringsecuritydemo.appUser.AppUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,17 +22,21 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain (HttpSecurity http) throws Exception {
         return http
-            .csrf().disable()
-            .httpBasic().and()
-            .authorizeHttpRequests()
-            .antMatchers(
-                HttpMethod.POST,
-                "/api/app-users"
-            ).permitAll()
-            .anyRequest()
-            .authenticated()
-            .and()
-            .build();
+                .csrf().disable()
+                .httpBasic().and()
+                .authorizeHttpRequests()
+                .antMatchers(
+                        HttpMethod.POST,
+                        "/api/app-users"
+                ).permitAll()
+                .antMatchers(
+                        HttpMethod.POST,
+                        "/api/cars"
+                ).hasRole("ADMIN")
+                .anyRequest()
+                .authenticated()
+                .and()
+                .build();
     }
 
     @Bean
@@ -47,7 +53,7 @@ public class SecurityConfig {
             return User.builder()
                 .username(appUser.getUsername())
                 .password(appUser.getPassword())
-                .roles("BASIC")
+                .roles(appUser.getRole())
                 .build();
         };
     }
